@@ -32,7 +32,7 @@ node {
       def pubProfilesJson = sh script: "az webapp deployment list-publishing-profiles -g $resourceGroup -n $webAppName", returnStdout: true
       def ftpProfile = getFtpPublishProfile pubProfilesJson
       // upload package
-     sh '''#!/bin/bash
+     sh '''
      az webapp deployment source config-zip \
        --resource-group jenkins-get-started-rg \
        --name jenkins-sample-app123 \
