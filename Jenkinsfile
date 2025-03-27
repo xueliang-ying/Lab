@@ -36,7 +36,7 @@ node {
          az webapp deployment source config-zip \
          --resource-group jenkins-get-started-rg \
          --name jenkins-sample-app123 \
-         --src target/calculator-1.0.wa\
+         --src target/calculator-1.0.war
       '''
       // log out
       sh 'az logout'
