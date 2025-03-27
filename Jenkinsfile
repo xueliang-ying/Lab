@@ -37,7 +37,7 @@ node {
   username=\$(echo "\$pubProfilesJson" | grep -oP '(?<="userName": ")[^"]+')
   password=\$(echo "\$pubProfilesJson" | grep -oP '(?<="userPWD": ")[^"]+')
 
-  curl -T target/calculator-1.0.war "\$url/webapps/ROOT.war" --user "\$username:\$password"
+  curl -T target/calculator-1.0.war "$url/webapps/ROOT.war" --user "$username:$password"
 
   az logout
 """
