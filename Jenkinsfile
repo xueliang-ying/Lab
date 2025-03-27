@@ -28,17 +28,19 @@ node {
         usernameVariable: 'AZURE_CLIENT_ID'
       )]) {
        sh """
-          az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET -t \$AZURE_TENANT_ID
-          az account set -s \$AZURE_SUBSCRIPTION_ID
+  az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+  az account set -s $AZURE_SUBSCRIPTION_ID
 
-          pubProfilesJson=\$(az webapp deployment list-publishing-profiles -g ${resourceGroup} -n ${webAppName} --output json)
-          url=\$(echo \$pubProfilesJson | grep -oP '(?<="publishUrl": ")[^"]*')
-          username=\$(echo \$pubProfilesJson | grep -oP '(?<="userName": ")[^"]*')
-          password=\$(echo \$pubProfilesJson | grep -oP '(?<="userPWD": ")[^"]*')
+  pubProfilesJson=\$(az webapp deployment list-publishing-profiles -g ${resourceGroup} -n ${webAppName} --output json)
+  url=\$(echo "\$pubProfilesJson" | grep -oP '(?<="publishUrl": ")[^"]+')
+  username=\$(echo "\$pubProfilesJson" | grep -oP '(?<="userName": ")[^"]+')
+  password=\$(echo "\$pubProfilesJson" | grep -oP '(?<="userPWD": ")[^"]+')
 
-          curl -T target/calculator-1.0.war ftp://\$url/site/wwwroot/webapps/ROOT.war --user \$username:\$password
-          az logout
-        """
+  curl -T target/calculator-1.0.war ftp://\$url/site/wwwroot/webapps/ROOT.war --user \$username:\$password
+
+  az logout
+"""
+
       }
     }
   }
