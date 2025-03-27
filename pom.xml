@@ -3,12 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>ms.kenchen</groupId>
   <artifactId>calculator</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+      </plugin>
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -16,16 +30,18 @@
           <source>11</source>
           <target>11</target>
         </configuration>
-      </plugin>    
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.1.1</version>
+        <version>3.3.2</version>
       </plugin>
+
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.2.9.v20150224</version>
+        <version>9.4.35.v20201120</version>
         <configuration>
           <webApp>
             <contextPath>/</contextPath>
@@ -35,7 +51,6 @@
           <stopKey>stopit</stopKey>
           <stopWait>10</stopWait>
           <httpConnector>
-            <!--<port>8080</port>-->
             <idleTimeout>60000</idleTimeout>
           </httpConnector>
         </configuration>
@@ -43,9 +58,7 @@
           <execution>
             <id>start-jetty</id>
             <phase>pre-integration-test</phase>
-            <goals>
-              <goal>start</goal>
-            </goals>
+            <goals><goal>start</goal></goals>
             <configuration>
               <scanIntervalSeconds>0</scanIntervalSeconds>
               <daemon>true</daemon>
@@ -54,14 +67,13 @@
           <execution>
             <id>stop-jetty</id>
             <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
+            <goals><goal>stop</goal></goals>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+
   <dependencies>
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
