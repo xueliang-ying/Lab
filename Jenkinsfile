@@ -33,10 +33,11 @@ node {
       def ftpProfile = getFtpPublishProfile pubProfilesJson
       // upload package
      sh '''
-     az webapp deployment source config-zip \
+     az webapp deploy \
        --resource-group jenkins-get-started-rg \
        --name jenkins-sample-app123 \
-       --src target/calculator-1.0.war
+       --src target/calculator-1.0.war \
+       --type war
   '''
       // log out
       sh 'az logout'
