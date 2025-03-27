@@ -34,10 +34,10 @@ node {
       // upload package
      sh '''#!/bin/bash
      az webapp deployment source config-zip \
-     --resource-group jenkins-get-started-rg \
-     --name jenkins-sample-app123 \
-     --src target/calculator-1.0.war
-    '''
+       --resource-group jenkins-get-started-rg \
+       --name jenkins-sample-app123 \
+       --src target/calculator-1.0.war
+  '''
       // log out
       sh 'az logout'
     }
